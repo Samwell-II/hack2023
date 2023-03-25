@@ -7,6 +7,7 @@ import MatrixInput from './components/matrix-input/MatrixInput';
 import MatrixDimensionInput from './components/matrix-input/MatrixDimensionInput';
 import useMatrix from './components/matrix-input/useMatrix';
 import MatrixInputModeSelector from './components/matrix-input/MatrixInputModeSelector';
+import LinearProgramInput from './components/lp-input/LinearProgramInput';
 
 const { Content, Header } = Layout;
 
@@ -20,23 +21,7 @@ const App: FC = () => {
           <Title level={2} style={{margin: 0, color: 'white'}}>LP</Title>
         </Header>
         <Content style={{padding: '24px 50px'}}>
-          <div>
-            <MatrixDimensionInput
-              value={matrix.rows}
-              onChange={matrix.setRows}
-              onIncrement={matrix.incrementRows}
-              onDecrement={matrix.decrementRows}
-            /><br/>
-            <MatrixDimensionInput
-              value={matrix.cols}
-              onChange={matrix.setCols}
-              onIncrement={matrix.incrementCols}
-              onDecrement={matrix.decrementCols}
-            /><br/>
-            <MatrixInputModeSelector value='cells' /><br/>
-            <Button onClick={matrix.clear}>Clear</Button><br/>
-            <MatrixInput data={matrix.data} onChange={matrix.setData}></MatrixInput>
-          </div>
+          <LinearProgramInput />
         </Content>
       </Layout>
     </div>

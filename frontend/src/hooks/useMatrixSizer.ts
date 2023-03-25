@@ -6,8 +6,8 @@ const calculateDims = (data: number[][], size: MatrixInputCellSize): [number, nu
     const rows = getNumRows(data);
     const cols = getNumCols(data);
 
-    const width = rows*(cellSizeMap[size] + 1) + 1;
-    const height = cols*(cellSizeMap[size] + 1) + 1;
+    const width = cols*(cellSizeMap[size] + 1) + 1;
+    const height = rows*(cellSizeMap[size] + 1) + 1;
 
     return [width, height];
 }

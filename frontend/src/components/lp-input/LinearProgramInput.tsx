@@ -25,7 +25,7 @@ const optimizationModes = [
 ];
 
 const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram, onSolve }) => {
-    const matrixSizer = useMatrixSizer(600, 800);
+    const matrixSizer = useMatrixSizer(800, 600);
     const size = matrixSizer(linearProgram.matrix);
     const solveDisabled = linearProgram.rows == 0 || linearProgram.cols == 0;
 

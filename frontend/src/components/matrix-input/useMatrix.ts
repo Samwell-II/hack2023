@@ -9,6 +9,8 @@ export interface IUseMatrixProps {
     maxCols: number;
 }
 
+export type IUseMatrix = ReturnType<typeof useMatrix>;
+
 const defaultProps: IUseMatrixProps = {
     maxRows: MAX_ROWS,
     maxCols: MAX_COLS

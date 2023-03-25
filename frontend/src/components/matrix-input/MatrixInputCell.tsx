@@ -10,8 +10,8 @@ export const cellSizeMap = {
 
 export const cellFontSizeMap = {
     'tiny': 10,
-    'small': 12,
-    'medium': 14,
+    'small': 10,
+    'medium': 10,
     'large': 16,
 }
 
@@ -54,7 +54,7 @@ const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, onChange, style, dis
         <input
             ref={ref}
             type="number"
-            value={String(data)}
+            value={Math.round(data * 10) / 10}
             style={selectedStyle}
             onChange={onChange}
             onClick={() => ref.current?.select()}

@@ -31,7 +31,7 @@ const LinearProgramResult: React.FC<IGraphProgramResultProps> = ({ event, onCopy
             </div>
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <h3>{ programResultText(event) }</h3>
-                <MatrixInput data={[[event.output.value]]} disabled size='tiny' />
+                <MatrixInput data={[[event.output.value]]} disabled size='medium' />
             </div>
         </div>
     );

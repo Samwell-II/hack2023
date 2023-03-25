@@ -38,8 +38,8 @@ const LinearProgramResult: React.FC<ILinearProgramResultProps> = ({ event, onCop
             </div>
             <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
                 <h3>Solution</h3>
-                <MatrixInput data={[[event.output.value]]} disabled size='tiny' />
-                <MatrixInput data={[event.output.x]} disabled size='tiny' />
+                <MatrixInput data={[[event.output.value]]} disabled size='medium' />
+                <MatrixInput data={[event.output.x]} disabled size='medium' />
             </div>
         </div>
     );

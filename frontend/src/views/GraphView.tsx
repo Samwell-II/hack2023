@@ -1,13 +1,16 @@
 import { Button, Form, Input, Select, Space } from 'antd';
 import React, { useState } from 'react';
+import { IGraphProgramInput, solveGraphProgram } from '../api/graphProgram';
 import MatrixDimensionInput from '../components/matrix-input/MatrixDimensionInput';
 import MatrixInput from '../components/matrix-input/MatrixInput';
 import MatrixInputModeSelector from '../components/matrix-input/MatrixInputModeSelector';
 import { IUseMatrix } from '../components/matrix-input/useMatrix';
+import { SolveEvent } from '../hooks/useHistory';
 import useMatrixSizer from '../hooks/useMatrixSizer';
 
 export interface IGraphViewProps {
     matrix: IUseMatrix;
+    onSolve?: (event: SolveEvent) => void;
 }
 
 const graphProgramOptions = [
@@ -15,14 +18,17 @@ const graphProgramOptions = [
     { value: 'fractional-matching', label: 'Fractional Matching Number' },
 ];
 
-const GraphView: React.FC<IGraphViewProps> = ({ matrix }) => {
-    const [graphProgram, setGraphProgram] = useState('fractional-chromatic');
+const GraphView: React.FC<IGraphViewProps> = ({ matrix, onSolve }) => {
+    const [graphProgram, setGraphProgram] = useState<IGraphProgramInput['program']>('fractional-chromatic');
     const matrixSizer = useMatrixSizer(800, 600);
     const size = matrixSizer(matrix.data);
 
-    const solve = () => {
-
-    };
+    const solve = onSolve && (async () => {
+        onSolve(await solveGraphProgram({
+            matrix: matrix.data,
+            program: graphProgram,
+        }));
+    });
 
     return (
         <div style={{display: 'grid', width: 'fit-content', columnGap: '24px', rowGap: '24px'}}>
@@ -47,7 +53,7 @@ const GraphView: React.FC<IGraphViewProps> = ({ matrix }) => {
                 <Button onClick={matrix.clear}>Clear</Button>
             </div>
             <div style={{gridRow: 2, gridColumn: 2}}>
-                <MatrixInput data={matrix.data} size={size} />
+                <MatrixInput data={matrix.data} onChange={matrix.setData} size={size} />
             </div>
             <div style={{display: 'flex', flexDirection: 'column', gap: '8px', gridRow: 2, gridColumn: 3}}>
                 <Form layout='vertical'>
@@ -63,7 +69,7 @@ const GraphView: React.FC<IGraphViewProps> = ({ matrix }) => {
                 
                 <Button
                     type="primary"
-                    onClick={event => solve()}
+                    onClick={solve}
                     style={{width: '100%'}}
                 >Solve</Button>
             </div>

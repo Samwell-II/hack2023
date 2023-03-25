@@ -24,10 +24,22 @@ const App: FC = () => {
   const [mode, setMode] = useState('matrix-entry');
 
   const onCopy = (event: SolveEvent) => {
-    linearProgram.setMatrix(event.input.matrix);
-    linearProgram.setObjective([event.input.objective]);
-    linearProgram.setConstraint(event.input.constraint.map(n => [n]));
-    linearProgram.setOptimization(event.input.optimization);
+    switch(event.type) {
+      case 'linear-program':
+        linearProgram.setMatrix(event.input.matrix);
+        linearProgram.setObjective([event.input.objective]);
+        linearProgram.setConstraint(event.input.constraint.map(n => [n]));
+        linearProgram.setOptimization(event.input.optimization);
+        setMode('matrix-entry');
+        break;
+      case 'graph-program':
+        graphMatrix.setData(event.input.matrix);
+        setMode('graph-entry');
+        break;
+      default:
+        const exhaustive: never = event;
+        throw new Error(`Non-exhaustive switch statement receieved ${event}`);
+    }
   }
 
   return (
@@ -48,7 +60,7 @@ const App: FC = () => {
           {
             mode == 'matrix-entry'
               ? <LinearProgramView linearProgram={linearProgram} onSolve={archiveEvent} />
-              : <GraphView matrix={graphMatrix} />
+              : <GraphView matrix={graphMatrix} onSolve={archiveEvent} />
           }
           <br/>
           <History history={history} onCopy={onCopy} />

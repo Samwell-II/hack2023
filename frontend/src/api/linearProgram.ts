@@ -12,6 +12,7 @@ export interface ILinearProgramOutput {
 }
 
 export interface ILinearProgramResult {
+    type: 'linear-program';
     input: ILinearProgramInput;
     output: ILinearProgramOutput;
     dispatchedAt: Date;
@@ -20,6 +21,7 @@ export interface ILinearProgramResult {
 
 export const solveLinearProgram = async (input: ILinearProgramInput) => {
     return {
+        type: 'linear-program',
         input,
         output: {
             value: 10,

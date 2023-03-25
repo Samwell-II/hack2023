@@ -4,6 +4,7 @@ import MatrixDimensionInput from '../matrix-input/MatrixDimensionInput';
 import MatrixInput from '../matrix-input/MatrixInput';
 import MatrixInputModeSelector from '../matrix-input/MatrixInputModeSelector';
 import useMatrix from '../matrix-input/useMatrix';
+import useLinearProgram from './useLinearProgram';
 
 const gridStyle: React.CSSProperties = {
     display: 'grid',
@@ -18,7 +19,7 @@ const optimizationModes = [
 ];
 
 const LinearProgramInput: React.FC = () => {
-    const matrix = useMatrix([[1,2,3,6],[4,5,6,9],[1,0,1,0]]);
+    const matrix = useLinearProgram([[1,2,3,6],[4,5,6,9],[1,0,1,0]], [[1,2,1,3]], [[1],[3],[2]]);
 
     return (
         <div style={gridStyle}>
@@ -36,7 +37,8 @@ const LinearProgramInput: React.FC = () => {
 
             <div style={{gridRow: 2, gridColumn: 2, alignSelf: 'center'}}>
                 <MatrixInput
-                    data={[[1,2,3,4]]}
+                    data={matrix.objective}
+                    onChange={matrix.setObjective}
                 />
             </div>
 
@@ -58,14 +60,15 @@ const LinearProgramInput: React.FC = () => {
                     onDecrement={matrix.decrementCols}
                 />
                 <Button onClick={matrix.clear}>Clear</Button>
+                <Button type="primary">Solve</Button>
             </div>
 
             <div style={{gridRow: 3, gridColumn: 2}}>
-                <MatrixInput data={matrix.data} onChange={matrix.setData}></MatrixInput>
+                <MatrixInput data={matrix.matrix} onChange={matrix.setMatrix}></MatrixInput>
             </div>
 
             <div style={{gridRow: 3, gridColumn: 3}}>
-                <MatrixInput data={[[1],[2],[3]]} />
+                <MatrixInput data={matrix.constraint} onChange={matrix.setConstraint} />
             </div>
         </div>
     );

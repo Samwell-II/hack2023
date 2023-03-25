@@ -22,14 +22,14 @@ const LinearProgramResult: React.FC<ILinearProgramResultProps> = ({ event, onCop
                         {event.input.optimization == 'max' ? 'Maximize' : 'Minimize'}
                     </div>
                     <div style={{gridRow: 1, gridColumn: 2, alignSelf: 'center'}}>
-                        <MatrixInput data={objectiveMatrix} />
+                        <MatrixInput data={objectiveMatrix} disabled />
                     </div>
                     <div style={{gridRow: 2, gridColumn: 1, alignSelf: 'center'}}>
                         such that
                     </div>
                     <div style={{display: 'flex', flexDirection: 'row', gap: '16px', gridRow: 2, gridColumn: 2, alignSelf: 'center'}}>
-                        <MatrixInput data={event.input.matrix} />
-                        <MatrixInput data={constraintMatrix} />
+                        <MatrixInput data={event.input.matrix} disabled />
+                        <MatrixInput data={constraintMatrix} disabled />
                     </div>
                     <div style={{gridRow: 3, gridColumn: '1 / span 2'}}>
                         <Button style={{width: '100%'}} icon={<CopyOutlined />} onClick={onCopy}>Copy</Button>
@@ -38,8 +38,8 @@ const LinearProgramResult: React.FC<ILinearProgramResultProps> = ({ event, onCop
             </div>
             <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
                 <h3>Solution</h3>
-                <MatrixInput data={[[event.output.value]]} />
-                <MatrixInput data={[event.output.x]} />
+                <MatrixInput data={[[event.output.value]]} disabled />
+                <MatrixInput data={[event.output.x]} disabled />
             </div>
         </div>
     );

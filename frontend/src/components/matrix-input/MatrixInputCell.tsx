@@ -7,6 +7,7 @@ export interface IMatrixInputCellProps {
     data: number;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     style?: React.CSSProperties;
+    disabled?: boolean;
 }
 
 const inputStyle: React.CSSProperties = {
@@ -23,7 +24,7 @@ const inputStyle: React.CSSProperties = {
     outline: 0,
 };
 
-const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, onChange, style }) => {
+const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, onChange, style, disabled }) => {
     const ref = useRef<HTMLInputElement>(null);
 
     return (
@@ -35,6 +36,7 @@ const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, onChange, style }) =
             onChange={onChange}
             onClick={() => ref.current?.select()}
             onFocus={() => ref.current?.select()}
+            disabled={disabled}
         />
     )
 }

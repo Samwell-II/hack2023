@@ -79,6 +79,8 @@ const useMatrix = (initialData: number[][], initialProps?: Partial<IUseMatrixPro
         }
     );
 
+    const clear = () => setData((data) => makeEmptyData(getNumRows(data), ghostColDim));
+
     return {
         data,
         rows: getNumRows(data),
@@ -90,7 +92,8 @@ const useMatrix = (initialData: number[][], initialProps?: Partial<IUseMatrixPro
         incrementRows: () => offsetDimensions(1, 0),
         decrementRows: () => offsetDimensions(-1, 0),
         incrementCols: () => offsetDimensions(0, 1),
-        decrementCols: () => offsetDimensions(0, -1)
+        decrementCols: () => offsetDimensions(0, -1),
+        clear
     };
 }
 

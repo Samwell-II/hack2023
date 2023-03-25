@@ -1,5 +1,6 @@
 import { Button, Checkbox, Select } from 'antd';
 import React from 'react';
+import useMatrixSizer from '../../hooks/useMatrixSizer';
 import MatrixDimensionInput from '../matrix-input/MatrixDimensionInput';
 import MatrixInput from '../matrix-input/MatrixInput';
 import MatrixInputModeSelector from '../matrix-input/MatrixInputModeSelector';
@@ -24,6 +25,8 @@ const optimizationModes = [
 ];
 
 const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram, onSolve }) => {
+    const matrixSizer = useMatrixSizer(600, 800);
+    const size = matrixSizer(linearProgram.matrix);
     const solveDisabled = linearProgram.rows == 0 || linearProgram.cols == 0;
 
     return (
@@ -45,6 +48,7 @@ const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram,
                 <MatrixInput
                     data={linearProgram.objective}
                     onChange={linearProgram.setObjective}
+                    size={size}
                 />
             </div>
 
@@ -72,11 +76,19 @@ const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram,
             </div>
 
             <div style={{gridRow: 3, gridColumn: 2}}>
-                <MatrixInput data={linearProgram.matrix} onChange={linearProgram.setMatrix}></MatrixInput>
+                <MatrixInput
+                    data={linearProgram.matrix}
+                    onChange={linearProgram.setMatrix}
+                    size={size}
+                />
             </div>
 
             <div style={{gridRow: 3, gridColumn: 3}}>
-                <MatrixInput data={linearProgram.constraint} onChange={linearProgram.setConstraint} />
+                <MatrixInput
+                    data={linearProgram.constraint}
+                    onChange={linearProgram.setConstraint}
+                    size={size}
+                />
             </div>
         </div>
     );

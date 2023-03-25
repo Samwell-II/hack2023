@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import MatrixInputCell from './MatrixInputCell';
+import MatrixInputCell, { cellSizeMap, MatrixInputCellSize } from './MatrixInputCell';
 
 export interface IMatrixInputProps {
     data: number[][];
     onChange?: (data: number[][]) => void;
     disabled?: boolean;
+    size: MatrixInputCellSize;
 }
 
 const matrixStyle: React.CSSProperties = {
@@ -37,7 +38,7 @@ const makeCellStyle = (rowIndex: number, colIndex: number) => {
     return style;
 }
 
-const MatrixInput: FC<IMatrixInputProps> = ({ data, onChange, disabled }) => {
+const MatrixInput: FC<IMatrixInputProps> = ({ data, onChange, disabled, size }) => {
     return (
         <div style={matrixStyle}>
             {
@@ -55,6 +56,7 @@ const MatrixInput: FC<IMatrixInputProps> = ({ data, onChange, disabled }) => {
                                         onChange(copy);
                                     })}
                                     disabled={disabled}
+                                    size={size}
                                 />
                             ))
                         }

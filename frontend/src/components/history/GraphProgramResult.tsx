@@ -12,8 +12,8 @@ export interface IGraphProgramResultProps {
 
 const programResultText = (event: IGraphProgramResult) => {
     switch(event.input.program) {
-        case 'fractional-chromatic': return 'Fractional Chromatic Number'
-        case 'fractional-matching': return 'Fractional Matching Number'
+        case 'chromatic-number': return 'Fractional Chromatic Number'
+        case 'matching-number': return 'Fractional Matching Number'
         default:
             const exhaustive: never = event.input.program;
             throw new Error(`Non-exhaustive switch statement receieved ${event.input.program}`);

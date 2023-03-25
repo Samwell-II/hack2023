@@ -14,12 +14,12 @@ export interface IGraphViewProps {
 }
 
 const graphProgramOptions = [
-    { value: 'fractional-chromatic', label: 'Fractional Chromatic Number' },
-    { value: 'fractional-matching', label: 'Fractional Matching Number' },
+    { value: 'chromatic-number', label: 'Fractional Chromatic Number' },
+    { value: 'matching-number', label: 'Fractional Matching Number' },
 ];
 
 const GraphView: React.FC<IGraphViewProps> = ({ matrix, onSolve }) => {
-    const [graphProgram, setGraphProgram] = useState<IGraphProgramInput['program']>('fractional-chromatic');
+    const [graphProgram, setGraphProgram] = useState<IGraphProgramInput['program']>('chromatic-number');
     const matrixSizer = useMatrixSizer(800, 600);
     const size = matrixSizer(matrix.data);
 

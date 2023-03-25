@@ -1,7 +1,8 @@
+import { API_BASE_URL } from ".";
 
 export interface IGraphProgramInput {
     matrix: number[][];
-    program: 'fractional-chromatic' | 'fractional-matching';
+    program: 'chromatic-number' | 'matching-number';
 }
 
 export interface IGraphProgramOutput {
@@ -17,11 +18,24 @@ export interface IGraphProgramResult {
 }
 
 export const solveGraphProgram = async (input: IGraphProgramInput): Promise<IGraphProgramResult> => {
+    const res = await fetch(`${API_BASE_URL}/adj-mat`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+            matrix: input.matrix,
+            parameter: input.program,
+        }),
+    });
+
+    const output = await res.json();
+
     return {
         type: 'graph-program',
         input,
         output: {
-            value: 10,
+            value: output.value,
         },
         dispatchedAt: new Date(),
         completedAt: new Date(),

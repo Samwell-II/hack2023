@@ -67,7 +67,8 @@ def solve(A, b, c):
     answer = z[0]
     x = [0]*n
     for i in nb:
-        x[i]=S[i][0]
+        if i < n:
+            x[i]=S[i][0]
     return {'value':answer, 'x':x}
 
 

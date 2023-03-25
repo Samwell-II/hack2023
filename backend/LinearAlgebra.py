@@ -53,12 +53,18 @@ def add(u,v):
         uv.append(u[i]+v[i])
     return uv
     
+def rowcolDelete(M,j):
+    N = M
+    N.pop(j)
+    for i in range(len(N)):
+        N[i].pop(j)
+    return N
 
-# M = [
-#     [1,0,0,0],
-#     [0,1,0],
-#     [3,2,1,1],
-# ]
+M = [
+    [1,0,0,0],
+    [0,1,0],
+    [3,2,1,1],
+]
 
 # u = [2,1,1,0]
 # v = [1,2,3]
@@ -71,4 +77,4 @@ def add(u,v):
 # print(scale(2,u))
 # print(add(u,v+[1]))
 
-
+# print(rowcolDelete(M, 0))

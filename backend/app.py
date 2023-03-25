@@ -1,4 +1,7 @@
 from flask import Flask, request
+from LPSolver import solve
+from LinearAlgebra import tpose
+from Translator import independentSets, evIncidence
 
 app = Flask(__name__)
 
@@ -26,6 +29,30 @@ Response
 
 @app.post("/lp")
 def solve_linear_program():
-    matrix = request.json['matrix']
+    A = request.json['matrix']
+    b = request.json['constraint']
+    c = request.json['objective']
+    if request.json['optimization'] == 'max':
+        solution = solve(A, b, c)
+    else:
+        solution = solve(tpose(A),c,b)
     
-    return matrix
+    return solution
+
+
+@app.post("/adj-mat")
+def eval_adj_mat():
+    M = request.json['matrix']
+    param = request.json['parameter']
+    match param:
+        case "chromatic-number":
+            A = independentSets(M)
+            b = [1]*len(M)
+            c = [1]*len(M[0])
+        case "matching-number":
+            A = evIncidence(M)
+            b = [1]*len(M)
+            c = [1]*len(M[0])
+
+    
+    return solve(A,b,c)

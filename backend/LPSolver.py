@@ -61,10 +61,15 @@ def solve(A, b, c):
             done = True
 
     # Respond with solution :)
-    print("nb:" + str(nb))
-    print("z:" + str(z))
-    print("S:" + LA.ppMat(S))
-    
+    # print("nb:" + str(nb))
+    # print("z:" + str(z))
+    # print("S:" + LA.ppMat(S))
+    answer = z[0]
+    x = [0]*n
+    for i in nb:
+        x[i]=S[i][0]
+    return {'value':answer, 'x':x}
+
 
 # A = [
 #     [2,0],

@@ -2,7 +2,7 @@ import LinearAlgebra as LA
 import LPSolver as LP
 import helper as h
 
-def indSets(A):
+def independentSets(A):
     n=len(A)
     I = []
     I += indSetsHelp(A,[-1]*n)
@@ -65,8 +65,8 @@ def biqedgIncidence(A):
         data = q.pop()
         print(data)
         # print(data)
-        d0 = data[0]
-        d1 = data[1]
+        d0 = data[0].copy()
+        d1 = data[1].copy()
         d2 = data[2]
 
         if d2 >= n:
@@ -77,7 +77,7 @@ def biqedgIncidence(A):
         # print("newD1==" + str(newD1))
         if len(newD1) != 0:
             d0.add(d2)
-            q.add(len(newD1),(d0.copy(),newD1,d2+1))
+            q.add(len(newD1),(d0,newD1,d2+1))
         print()
     
     print(bicliques)

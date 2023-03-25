@@ -6,6 +6,7 @@ import Title from 'antd/es/typography/Title';
 import MatrixInput from './components/matrix-input/MatrixInput';
 import MatrixDimensionInput from './components/matrix-input/MatrixDimensionInput';
 import useMatrix from './components/matrix-input/useMatrix';
+import MatrixInputModeSelector from './components/matrix-input/MatrixInputModeSelector';
 
 const { Content, Header } = Layout;
 
@@ -25,14 +26,15 @@ const App: FC = () => {
               onChange={matrix.setRows}
               onIncrement={matrix.incrementRows}
               onDecrement={matrix.decrementRows}
-            />
+            /><br/>
             <MatrixDimensionInput
               value={matrix.cols}
               onChange={matrix.setCols}
               onIncrement={matrix.incrementCols}
               onDecrement={matrix.decrementCols}
-            />
-            <Button onClick={matrix.clear}>Clear</Button>
+            /><br/>
+            <MatrixInputModeSelector value='cells' /><br/>
+            <Button onClick={matrix.clear}>Clear</Button><br/>
             <MatrixInput data={matrix.data} onChange={matrix.setData}></MatrixInput>
           </div>
         </Content>

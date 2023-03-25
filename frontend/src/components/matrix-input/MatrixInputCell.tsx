@@ -1,6 +1,8 @@
 import React, { FC, useRef } from 'react';
 import './matrix-input-cell.css';
 
+export const CELL_SIZE = 42;
+
 export interface IMatrixInputCellProps {
     data: number;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -8,8 +10,8 @@ export interface IMatrixInputCellProps {
 }
 
 const inputStyle: React.CSSProperties = {
-    width: '42px',
-    height: '42px',
+    width: `${CELL_SIZE}px`,
+    height: `${CELL_SIZE}px`,
     boxSizing: 'content-box',
     padding: 0,
     

@@ -17,6 +17,7 @@ const useLinearProgram = (
     const matrix = useMatrix(matrixData, props);
     const [objective, setObjective] = useState(reshapeMatrix(objectiveData, 1, getNumCols(matrixData)));
     const [constraint, setConstraint] = useState(reshapeMatrix(constraintData, getNumRows(matrixData), 1));
+    const [optimization, setOptimization] = useState<'min' | 'max'>('max');
 
     const clear = () => {
         matrix.clear();
@@ -28,11 +29,13 @@ const useLinearProgram = (
         matrix: matrix.data,
         objective: reshapeMatrix(objective, 1, getNumCols(matrix.data)),
         constraint: reshapeMatrix(constraint, getNumRows(matrix.data), 1),
+        optimization,
         rows: matrix.rows,
         cols: matrix.cols,
         setMatrix: matrix.setData,
         setObjective,
         setConstraint,
+        setOptimization,
         setDimensions: matrix.setDimensions,
         setRows: matrix.setRows,
         setCols: matrix.setCols,

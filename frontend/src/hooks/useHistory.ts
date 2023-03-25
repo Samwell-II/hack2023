@@ -3,7 +3,7 @@ import { ILinearProgramResult } from '../api/linearProgram';
 
 export type SolveEvent = ILinearProgramResult;
 
-const useHistory = () => {
+const useHistory = (): [SolveEvent[], (event: SolveEvent) => void] => {
     const [history, setHistory] = useState<SolveEvent[]>([]);
 
     const archiveEvent = (event: SolveEvent) => {

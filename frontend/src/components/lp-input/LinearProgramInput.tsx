@@ -8,6 +8,7 @@ import useLinearProgram, { IUseLinearProgram } from './useLinearProgram';
 
 export interface ILinearProgramInputProps {
     linearProgram: IUseLinearProgram;
+    onSolve?: () => void;
 }
 
 const gridStyle: React.CSSProperties = {
@@ -22,7 +23,7 @@ const optimizationModes = [
     { value: 'min', label: 'Minimize' },
 ];
 
-const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram }) => {
+const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram, onSolve }) => {
     return (
         <div style={gridStyle}>
             <div style={{gridRow: 1, gridColumn: '2 / span 2'}}>
@@ -31,7 +32,8 @@ const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram 
 
             <div style={{gridRow: 2, gridColumn: 1, alignSelf: 'center'}}>
                 <Select
-                    value={'max'}
+                    value={linearProgram.optimization}
+                    onChange={linearProgram.setOptimization}
                     options={optimizationModes}
                     style={{width: '100%'}}
                 />
@@ -64,7 +66,7 @@ const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram 
                     onDecrement={linearProgram.decrementCols}
                 />
                 <Button onClick={linearProgram.clear}>Clear</Button>
-                <Button type="primary">Solve</Button>
+                <Button type="primary" onClick={onSolve}>Solve</Button>
             </div>
 
             <div style={{gridRow: 3, gridColumn: 2}}>

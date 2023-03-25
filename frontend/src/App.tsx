@@ -10,7 +10,7 @@ import useLinearProgram from './components/lp-input/useLinearProgram';
 const { Content, Header } = Layout;
 
 const App: FC = () => {
-  const [history, postEvent] = useHistory();
+  const [history, archiveEvent] = useHistory();
   const linearProgram = useLinearProgram([[1,2,3,6],[4,5,6,9],[1,0,1,0]], [[1,2,1,3]], [[1],[3],[2]]);
 
   return (
@@ -20,8 +20,10 @@ const App: FC = () => {
           <Title level={2} style={{margin: 0, color: 'white'}}>LP</Title>
         </Header>
         <Content style={{padding: '24px 50px'}}>
-          <LinearProgramView linearProgram={linearProgram} />
-          <p>History</p>
+          <LinearProgramView linearProgram={linearProgram} onSolve={archiveEvent} />
+          {
+            history.map(() => (<p>test</p>))
+          }
         </Content>
       </Layout>
     </div>

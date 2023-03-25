@@ -48,12 +48,14 @@ const LinearProgramInput: React.FC = () => {
 
             <div style={{display: 'flex', flexDirection: 'column', gap: '8px', gridRow: 3, gridColumn: 1}}>
                 <MatrixDimensionInput
+                    label='Rows'
                     value={matrix.rows}
                     onChange={matrix.setRows}
                     onIncrement={matrix.incrementRows}
                     onDecrement={matrix.decrementRows}
                 />
                 <MatrixDimensionInput
+                    label='Cols'
                     value={matrix.cols}
                     onChange={matrix.setCols}
                     onIncrement={matrix.incrementCols}

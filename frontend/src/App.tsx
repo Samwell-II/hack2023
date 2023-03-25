@@ -6,6 +6,7 @@ import Title from 'antd/es/typography/Title';
 import useHistory from './hooks/useHistory';
 import LinearProgramView from './views/LinearProgramView';
 import useLinearProgram from './components/lp-input/useLinearProgram';
+import History from './components/history/History';
 
 const { Content, Header } = Layout;
 
@@ -21,9 +22,8 @@ const App: FC = () => {
         </Header>
         <Content style={{padding: '24px 50px'}}>
           <LinearProgramView linearProgram={linearProgram} onSolve={archiveEvent} />
-          {
-            history.map(() => (<p>test</p>))
-          }
+          <br/>
+          <History history={history} />
         </Content>
       </Layout>
     </div>

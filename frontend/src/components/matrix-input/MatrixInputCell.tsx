@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import './matrix-input-cell.css';
 
 export interface IMatrixInputCellProps {
@@ -22,8 +22,18 @@ const inputStyle: React.CSSProperties = {
 };
 
 const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, onChange, style }) => {
+    const ref = useRef<HTMLInputElement>(null);
+
     return (
-        <input type="number" value={String(data)} style={{...inputStyle, ...style}} onChange={onChange} />
+        <input
+            ref={ref}
+            type="number"
+            value={String(data)}
+            style={{...inputStyle, ...style}}
+            onChange={onChange}
+            onClick={() => ref.current?.select()}
+            onFocus={() => ref.current?.select()}
+        />
     )
 }
 

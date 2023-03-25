@@ -41,10 +41,11 @@ const MatrixInput: FC<IMatrixInputProps> = ({ data, onChange }) => {
         <div style={matrixStyle}>
             {
                 data.map((row, rowIndex) => (
-                    <div style={matrixRowStyle}>
+                    <div key={rowIndex} style={matrixRowStyle}>
                         {
                             row.map((cell, colIndex) => (
                                 <MatrixInputCell
+                                    key={colIndex}
                                     data={cell}
                                     style={makeCellStyle(rowIndex, colIndex)}
                                     onChange={onChange && ((event) => {

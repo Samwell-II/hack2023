@@ -32,6 +32,7 @@ const App: FC = () => {
               onIncrement={matrix.incrementCols}
               onDecrement={matrix.decrementCols}
             />
+            <Button onClick={matrix.clear}>Clear</Button>
             <MatrixInput data={matrix.data} onChange={matrix.setData}></MatrixInput>
           </div>
         </Content>

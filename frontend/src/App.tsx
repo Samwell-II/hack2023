@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { Button, Input, InputNumber, Layout, Space } from 'antd';
 import 'antd/dist/reset.css';
 import Title from 'antd/es/typography/Title';
-import useHistory from './hooks/useHistory';
+import useHistory, { SolveEvent } from './hooks/useHistory';
 import LinearProgramView from './views/LinearProgramView';
 import useLinearProgram from './components/lp-input/useLinearProgram';
 import History from './components/history/History';
@@ -14,6 +14,13 @@ const App: FC = () => {
   const [history, archiveEvent] = useHistory();
   const linearProgram = useLinearProgram([[1,2,3,6],[4,5,6,9],[1,0,1,0]], [[1,2,1,3]], [[1],[3],[2]]);
 
+  const onCopy = (event: SolveEvent) => {
+    linearProgram.setMatrix(event.input.matrix);
+    linearProgram.setObjective([event.input.objective]);
+    linearProgram.setConstraint(event.input.constraint.map(n => [n]));
+    linearProgram.setOptimization(event.input.optimization);
+  }
+
   return (
     <div className="App">
       <Layout style={{minHeight: '100vh'}}>
@@ -23,7 +30,7 @@ const App: FC = () => {
         <Content style={{padding: '24px 50px'}}>
           <LinearProgramView linearProgram={linearProgram} onSolve={archiveEvent} />
           <br/>
-          <History history={history} />
+          <History history={history} onCopy={onCopy} />
         </Content>
       </Layout>
     </div>

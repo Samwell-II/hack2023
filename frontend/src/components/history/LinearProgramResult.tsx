@@ -6,9 +6,10 @@ import MatrixInput from '../matrix-input/MatrixInput';
 
 export interface ILinearProgramResultProps {
     event: ILinearProgramResult;
+    onCopy?: () => void;
 }
 
-const LinearProgramResult: React.FC<ILinearProgramResultProps> = ({ event }) => {
+const LinearProgramResult: React.FC<ILinearProgramResultProps> = ({ event, onCopy }) => {
     const objectiveMatrix = [event.input.objective];
     const constraintMatrix = event.input.constraint.map(n => [n]);
 
@@ -31,7 +32,7 @@ const LinearProgramResult: React.FC<ILinearProgramResultProps> = ({ event }) => 
                         <MatrixInput data={constraintMatrix} />
                     </div>
                     <div style={{gridRow: 3, gridColumn: '1 / span 2'}}>
-                        <Button style={{width: '100%'}} icon={<CopyOutlined />}>Copy</Button>
+                        <Button style={{width: '100%'}} icon={<CopyOutlined />} onClick={onCopy}>Copy</Button>
                     </div>
                 </div>
             </div>

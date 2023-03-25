@@ -3,16 +3,15 @@ import type { FC } from 'react';
 import { Button, Input, InputNumber, Layout, Space } from 'antd';
 import 'antd/dist/reset.css';
 import Title from 'antd/es/typography/Title';
-import MatrixInput from './components/matrix-input/MatrixInput';
-import MatrixDimensionInput from './components/matrix-input/MatrixDimensionInput';
-import useMatrix from './components/matrix-input/useMatrix';
-import MatrixInputModeSelector from './components/matrix-input/MatrixInputModeSelector';
-import LinearProgramInput from './components/lp-input/LinearProgramInput';
+import useHistory from './hooks/useHistory';
+import LinearProgramView from './views/LinearProgramView';
+import useLinearProgram from './components/lp-input/useLinearProgram';
 
 const { Content, Header } = Layout;
 
 const App: FC = () => {
-  const matrix = useMatrix([[1,2,3,6],[4,5,6,9],[1,0,1,0]]);
+  const [history, postEvent] = useHistory();
+  const linearProgram = useLinearProgram([[1,2,3,6],[4,5,6,9],[1,0,1,0]], [[1,2,1,3]], [[1],[3],[2]]);
 
   return (
     <div className="App">
@@ -21,7 +20,8 @@ const App: FC = () => {
           <Title level={2} style={{margin: 0, color: 'white'}}>LP</Title>
         </Header>
         <Content style={{padding: '24px 50px'}}>
-          <LinearProgramInput />
+          <LinearProgramView linearProgram={linearProgram} />
+          <p>History</p>
         </Content>
       </Layout>
     </div>

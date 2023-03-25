@@ -6,6 +6,8 @@ export interface IUseLinearProgramProps extends IUseMatrixProps {
 
 }
 
+export type IUseLinearProgram = ReturnType<typeof useLinearProgram>;
+
 const useLinearProgram = (
     matrixData: number[][],
     objectiveData: number[][],

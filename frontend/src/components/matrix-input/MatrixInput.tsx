@@ -3,6 +3,7 @@ import MatrixInputCell from './MatrixInputCell';
 
 export interface IMatrixInputProps {
     data: number[][];
+    onChange?: (data: number[][]) => void;
 }
 
 const matrixStyle: React.CSSProperties = {
@@ -35,14 +36,24 @@ const makeCellStyle = (rowIndex: number, colIndex: number) => {
     return style;
 }
 
-const MatrixInput: FC<IMatrixInputProps> = ({ data }) => {
+const MatrixInput: FC<IMatrixInputProps> = ({ data, onChange }) => {
     return (
         <div style={matrixStyle}>
             {
                 data.map((row, rowIndex) => (
                     <div style={matrixRowStyle}>
                         {
-                            row.map((cell, colIndex) => (<MatrixInputCell data={cell} style={makeCellStyle(rowIndex, colIndex)} />))
+                            row.map((cell, colIndex) => (
+                                <MatrixInputCell
+                                    data={cell}
+                                    style={makeCellStyle(rowIndex, colIndex)}
+                                    onChange={onChange && ((event) => {
+                                        const copy = data.map(row => [...row]);
+                                        copy[rowIndex][colIndex] = event.target.value != '' ? parseInt(event.target.value) : 0;
+                                        onChange(copy);
+                                    })}
+                                />
+                            ))
                         }
                     </div>
                 ))

@@ -3,6 +3,7 @@ import './matrix-input-cell.css';
 
 export interface IMatrixInputCellProps {
     data: number;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
     style?: React.CSSProperties;
 }
 
@@ -20,9 +21,9 @@ const inputStyle: React.CSSProperties = {
     outline: 0,
 };
 
-const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, style }) => {
+const MatrixInputCell: FC<IMatrixInputCellProps> = ({ data, onChange, style }) => {
     return (
-        <input type="number" value={data} style={{...inputStyle, ...style}} />
+        <input type="number" value={String(data)} style={{...inputStyle, ...style}} onChange={onChange} />
     )
 }
 

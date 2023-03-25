@@ -12,7 +12,7 @@ const matrixStyle: React.CSSProperties = {
     width: 'fit-content',
     flexDirection: 'column',
 
-    border: '1px solid #cccccc',
+    border: '1px solid #d9d9d9',
     borderRadius: '6px',
     overflow: 'hidden',
 }

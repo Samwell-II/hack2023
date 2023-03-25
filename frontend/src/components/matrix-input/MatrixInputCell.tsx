@@ -20,7 +20,7 @@ const inputStyle: React.CSSProperties = {
 
     borderStyle: 'solid',
     borderWidth: '1px 0px 0px 1px',
-    borderColor: '#cccccc',
+    borderColor: '#d9d9d9',
     outline: 0,
 };
 

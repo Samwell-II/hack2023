@@ -15,7 +15,7 @@ const modes = [
 ]
 
 const MatrixInputModeSelector: React.FC<IMatrixInputModeSelectorProps> = ({ value, onChange }) => {
-    return (
+    /*return (
         <Radio.Group
             options={modes}
             onChange={onChange && ((event) => onChange(event.target.value))}
@@ -23,7 +23,8 @@ const MatrixInputModeSelector: React.FC<IMatrixInputModeSelectorProps> = ({ valu
             optionType="button"
             buttonStyle="solid"
         />
-    )
+    )*/
+    return (<></>)
 }
 
 export default MatrixInputModeSelector;

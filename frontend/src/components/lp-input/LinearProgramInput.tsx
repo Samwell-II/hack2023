@@ -24,6 +24,8 @@ const optimizationModes = [
 ];
 
 const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram, onSolve }) => {
+    const solveDisabled = linearProgram.rows == 0 || linearProgram.cols == 0;
+
     return (
         <div style={gridStyle}>
             <div style={{gridRow: 1, gridColumn: '2 / span 2'}}>
@@ -66,7 +68,7 @@ const LinearProgramInput: React.FC<ILinearProgramInputProps> = ({ linearProgram,
                     onDecrement={linearProgram.decrementCols}
                 />
                 <Button onClick={linearProgram.clear}>Clear</Button>
-                <Button type="primary" onClick={onSolve}>Solve</Button>
+                <Button type="primary" onClick={onSolve} disabled={solveDisabled}>Solve</Button>
             </div>
 
             <div style={{gridRow: 3, gridColumn: 2}}>

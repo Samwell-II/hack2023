@@ -60,15 +60,15 @@ def rowcolDelete(M,j):
         N[i].pop(j)
     return N
 
-M = [
-    [1,0,0,0],
-    [0,1,0],
-    [3,2,1,1],
-]
+# M = [
+#     [1,0,0,0],
+#     [0,1,0],
+#     [3,2,1,1],
+# ]
 
 # u = [2,1,1,0]
 # v = [1,2,3]
-# ppMat(M)
+# print(ppMat(M))
 
 # # ppMat(tpose(M))
 

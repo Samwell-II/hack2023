@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from LPSolver import solve
 from LinearAlgebra import tpose
-from Translator import independentSets, evIncidence
+from Translator import independentSets, evIncidence, edgeBicliqueIncidence
 
 app = Flask(__name__)
 
@@ -35,6 +35,10 @@ def solve_linear_program():
     A = request.json['matrix']
     b = request.json['constraint']
     c = request.json['objective']
+    # print("In app.py, the request received was")
+    # print(A)
+    # print(b)
+    # print(c)
     if request.json['optimization'] == 'max':
         solution = solve(A, b, c)
     else:
@@ -54,6 +58,10 @@ def eval_adj_mat():
         c = [1]*len(A[0])
     elif param == "matching-number":
         A = evIncidence(M)
+        b = [1]*len(A)
+        c = [1]*len(A[0])
+    elif param == "biclique-cover-number":
+        A = tpose(edgeBicliqueIncidence(M))
         b = [1]*len(A)
         c = [1]*len(A[0])
 

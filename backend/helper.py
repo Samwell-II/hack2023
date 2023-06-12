@@ -1,10 +1,10 @@
 
-class Queue:
+class Queue: # A min priority queue. It doesn't need to be priority as far as I can tell, but it doesn't hurt, I think
     root = None
 
     def add(self, i, data):
         n = QueueVertex(i, data)
-        print("adding " + str(n))
+        # print("adding " + str(n))
         if self.root is None:
             self.root = n
         else:
@@ -39,12 +39,12 @@ class QueueVertex:
     def add(self, n):
         if n is None:
             return self
-        if self.i > n.i:
+        if self.i > n.i: # The comparison happens
             return n.add(self)
         if self.right == None:
             self.right = n
             return self
-        if self.left == None:
+        if self.left == None: # self < right < left
             if self.right.i > n.i:
                 self.left = self.right
                 self.right = n

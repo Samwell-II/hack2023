@@ -6,6 +6,7 @@ export interface ILinearProgramInput {
     objective: number[];
     matrix: number[][];
     constraint: number[];
+    program: ""; // This is here to make History.tsx happy when I ask a SolveEvent for its input.program but is a bad fix.
 }
 
 export interface ILinearProgramOutput {

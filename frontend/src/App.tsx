@@ -20,7 +20,7 @@ const navItems = [
 const App: FC = () => {
   const [history, archiveEvent] = useHistory();
   const linearProgram = useLinearProgram([[1,2,3,6],[4,5,6,9],[1,0,1,0]], [[1,2,1,3]], [[1],[3],[2]]);
-  const graphMatrix = useMatrix([[0,1,0,0,1],[1,0,1,0,0],[0,1,0,1,0],[0,0,1,0,1],[1,0,0,0,1]]);
+  const graphMatrix = useMatrix([[0,1,0,0,1],[1,0,1,0,0],[0,1,0,1,0],[0,0,1,0,1],[1,0,0,1,0]]);
   const [mode, setMode] = useState('matrix-entry');
 
   const onCopy = (event: SolveEvent) => {

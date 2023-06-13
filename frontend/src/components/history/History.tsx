@@ -3,6 +3,7 @@ import React from 'react';
 import { SolveEvent } from '../../hooks/useHistory';
 import GraphProgramResult from './GraphProgramResult';
 import LinearProgramResult from './LinearProgramResult';
+import programResultText from './GraphProgramResult';
 
 export interface IHistoryProps {
     history: SolveEvent[];
@@ -12,7 +13,7 @@ export interface IHistoryProps {
 const { Panel } = Collapse;
 
 const makeEventTitle = (event: SolveEvent, idx: number) => {
-    return `${idx}: ${event.completedAt.toLocaleTimeString()}`;
+    return `${idx}: ${event.completedAt.toLocaleTimeString()} ${event.input.program}`;
 }
 
 const History: React.FC<IHistoryProps> = ({ history, onCopy }) => {

@@ -16,6 +16,7 @@ export interface IGraphViewProps {
 const graphProgramOptions = [
     { value: 'chromatic-number', label: 'Fractional Chromatic Number' },
     { value: 'matching-number', label: 'Fractional Matching Number' },
+    { value: 'biclique-cover-number', label: 'Fractional Biclique Cover Number' },
 ];
 
 const GraphView: React.FC<IGraphViewProps> = ({ matrix, onSolve }) => {

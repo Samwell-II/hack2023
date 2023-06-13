@@ -14,9 +14,10 @@ const programResultText = (event: IGraphProgramResult) => {
     switch(event.input.program) {
         case 'chromatic-number': return 'Fractional Chromatic Number'
         case 'matching-number': return 'Fractional Matching Number'
+        case 'biclique-cover-number': return 'Fractional Biclique Cover Number'
         default:
             const exhaustive: never = event.input.program;
-            throw new Error(`Non-exhaustive switch statement receieved ${event.input.program}`);
+            throw new Error(`Non-exhaustive switch statement receieved ${event.input.program}. Please fix in src/components/history/GraphProgramResult.tsx and api/graphProgram.ts`);
     }
 }
 

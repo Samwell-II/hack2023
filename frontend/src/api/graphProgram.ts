@@ -2,7 +2,7 @@ import { API_BASE_URL } from ".";
 
 export interface IGraphProgramInput {
     matrix: number[][];
-    program: 'chromatic-number' | 'matching-number';
+    program: 'chromatic-number' | 'matching-number' | 'biclique-cover-number';
 }
 
 export interface IGraphProgramOutput {

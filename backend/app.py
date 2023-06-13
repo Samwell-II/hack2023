@@ -57,11 +57,11 @@ def eval_adj_mat():
         b = [1]*len(A)
         c = [1]*len(A[0])
     elif param == "matching-number":
-        A = evIncidence(M)
+        A = tpose(evIncidence(M)) # Not sure if this should be transposed. Check this out.
         b = [1]*len(A)
         c = [1]*len(A[0])
-    elif param == "biclique-cover-number":
-        A = tpose(edgeBicliqueIncidence(M))
+    elif param == "biclique-cover-number": # max weight on edges s.t. bicliques not too weighted.
+        A = tpose(edgeBicliqueIncidence(M) )
         b = [1]*len(A)
         c = [1]*len(A[0])
 

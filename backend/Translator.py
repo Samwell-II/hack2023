@@ -102,6 +102,7 @@ def bicliqueHelper(source, target, index, A, n):
                 addSource = False
     if addSource:
         bicliques = bicliques + bicliqueHelper(source + [index], target, index + 1, A, n)
+        
 
     # can index be added to target?
     addTarget = True

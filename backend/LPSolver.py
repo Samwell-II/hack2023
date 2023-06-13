@@ -1,9 +1,9 @@
 import LinearAlgebra as LA
 
 def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
-    print(A)
-    print(b)
-    print(c)
+    # print(A)
+    # print(b)
+    # print(c)
     n=len(c)
     m=len(b)
     if not LA.matCheck(A, m, n):
@@ -20,7 +20,7 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
         S[i][n+1+i] = 1
     z=[0] + c + [0]*m
 
-    print(LA.ppMat(S))
+    # print(LA.ppMat(S))
 
     # Iterate until done
     done = False
@@ -50,7 +50,7 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
                     minSlack = effectiveSlack
                     r = i
         if r == -1: # No row had restricted slack
-            print("UNBOUNDED SOLUTION")
+            print("error: Solution Unbounded. Did you intend to solve the dual of this problem?")
             return {'error':"Solution Unbounded. Did you intend to solve the dual of this problem?"}
         
         # print("pivot on x_" + str(p) + " on row " + str(r))
@@ -81,6 +81,8 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
         if nonbas[i] <= n:
             x[nonbas[i]-1] = -1*S[i][0]
     print(x)
+    print(n)
+    print(m)
     print("The Solution is " + str(answer))
     return {'value':answer, 'x':x}
 

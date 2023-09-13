@@ -1,14 +1,21 @@
 import LinearAlgebra as LA
 
 def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
+    '''The main method of this class. Given a linear program of the form
+    max  c^tx
+    s.t. Ax<=b,
+    solves the program and returns the solution in a dict with the solution
+    value and solution vector.
+    '''
+#TODO this shouldn't all be one method. That's a bit silly...
     # print(A)
     # print(b)
     # print(c)
     n=len(c)
     m=len(b)
     if not LA.matCheck(A, m, n):
-        return {'error':"Bad Input! A is not square or the dimensions don't match."}
-    
+        return {'error':"Bad Input! A the dimensions don't match."}
+
     # Make first Slack Form
     S = []
     nonbas = []
@@ -30,29 +37,29 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
         # print(z)
         # print(nb)
         # print(LA.ppMat(S))
-        
+
         p=-1 # p for pivot
         for i in range(1,len(z)):
             if p<0 and z[i]>0:
                 p=i
                 # print(z[i])
-        
+
         if p<0:
             done = True
             continue
         r=-1 # r for row
         minSlack = float('-inf')
         for i in range(m):
-            if S[i][p]!=0:        
+            if S[i][p]!=0:
                 effectiveSlack = S[i][0]/S[i][p] # This is negative the maximum value the chosen pivot can change for row r
-                # if effective slack is non-zero and negative, or zero but a negative zero 
+                # if effective slack is non-zero and negative, or zero but a negative zero
                 if (effectiveSlack < 0 or (effectiveSlack==0 and S[i][p]>0)) and effectiveSlack > minSlack:
                     minSlack = effectiveSlack
                     r = i
         if r == -1: # No row had restricted slack
             print("error: Solution Unbounded. Did you intend to solve the dual of this problem?")
             return {'error':"Solution Unbounded. Did you intend to solve the dual of this problem?"}
-        
+
         # print("pivot on x_" + str(p) + " on row " + str(r))
         S[r] = LA.scale(1/S[r][p],S[r])
         for i in range(m):
@@ -63,6 +70,12 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
         iterate += 1 # Count the iterations
         # if iterate > 5: # For debugging?
             # done = True
+        if iterate % 1000 == 0:
+            print("Iteration " + str(iterate) + " with basic solution: " + str(z[0]))
+            print(z[5])
+            print(z[17])
+            print(z[100])
+    print("Total Iterations: " + str(iterate))
 
     # Respond with solution :)
     # print("nb:" + str(nb))
@@ -80,9 +93,9 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
     for i in range(m):
         if nonbas[i] <= n:
             x[nonbas[i]-1] = -1*S[i][0]
-    print(x)
-    print(n)
-    print(m)
+    # print(x)
+    # print(n)
+    # print(m)
     print("The Solution is " + str(answer))
     return {'value':answer, 'x':x}
 

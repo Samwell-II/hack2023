@@ -61,7 +61,7 @@ def eval_adj_mat():
         b = [1]*len(A)
         c = [1]*len(A[0])
     elif param == "biclique-cover-number": # max weight on edges s.t. bicliques not too weighted.
-        A = tpose(edgeBicliqueIncidence(M) )
+        A = tpose(edgeBicliqueIncidence(M, True))
         b = [1]*len(A)
         c = [1]*len(A[0])
 

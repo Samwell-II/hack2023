@@ -13,7 +13,7 @@ export interface IHistoryProps {
 const { Panel } = Collapse;
 
 const makeEventTitle = (event: SolveEvent, idx: number) => {
-    return `${idx}: ${event.completedAt.toLocaleTimeString()} ${event.input.program}`;
+    return `${idx}: ${event.completedAt.toLocaleTimeString()} -- ${event.input.program} -- Result: ${event.output.value}`;
 }
 
 const History: React.FC<IHistoryProps> = ({ history, onCopy }) => {

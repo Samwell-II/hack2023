@@ -99,7 +99,7 @@ def upsetT(U):
 
 # M = transitiveT(3)
 # bcfDouble(M)
-almostT = upsetT([0,1,2,3,5,6,8,9,11,12,14,15,16,17])
-print(ppMat(almostT))
-bcf(almostT)
+# almostT = upsetT([0,1,2,3,5,6,8,9,11,12,14,15,16,17])
+# print(ppMat(almostT))
+# bcf(almostT)
 

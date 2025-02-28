@@ -1,4 +1,6 @@
 import LinearAlgebra as LA
+from progress.bar import Bar
+from math import comb
 
 def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
     '''The main method of this class. Given a linear program of the form
@@ -7,10 +9,7 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
     solves the program and returns the solution in a dict with the solution
     value and solution vector.
     '''
-#TODO this shouldn't all be one method. That's a bit silly...
-    # print(A)
-    # print(b)
-    # print(c)
+    #TODO this shouldn't all be one method. That's a bit silly...
     n=len(c)
     m=len(b)
     if not LA.matCheck(A, m, n):
@@ -27,22 +26,16 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
         S[i][n+1+i] = 1
     z=[0] + c + [0]*m
 
-    # print(LA.ppMat(S))
-
     # Iterate until done
     done = False
     iterate = 0
+    tempAnswer = 0
+    # smallBar = Bar("searching...", max = comb(len(S[0]), len(S)))
     while not done:
-        # print("\nIteration " + str(iterate))
-        # print(z)
-        # print(nb)
-        # print(LA.ppMat(S))
-
         p=-1 # p for pivot
         for i in range(1,len(z)):
             if p<0 and z[i]>0:
                 p=i
-                # print(z[i])
 
         if p<0:
             done = True
@@ -60,7 +53,6 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
             print("error: Solution Unbounded. Did you intend to solve the dual of this problem?")
             return {'error':"Solution Unbounded. Did you intend to solve the dual of this problem?"}
 
-        # print("pivot on x_" + str(p) + " on row " + str(r))
         S[r] = LA.scale(1/S[r][p],S[r])
         for i in range(m):
             if i!=r:
@@ -70,33 +62,20 @@ def solve(A, b, c): # max c^tx s.t. Ax<=b, x>=0
         iterate += 1 # Count the iterations
         # if iterate > 5: # For debugging?
             # done = True
-        if iterate % 1000 == 0:
-            print("Iteration " + str(iterate) + " with basic solution: " + str(z[0]))
-            print(z[5])
-            print(z[17])
-            print(z[100])
-    print("Total Iterations: " + str(iterate))
-
-    # Respond with solution :)
-    # print("nb:" + str(nb))
-    # print("z:" + str(z))
-    # print("S:" + LA.ppMat(S))
+        # smallBar.next()
+        #if iterate % 10000 == 0:
+            #if tempAnswer == z[0]:
+                #break
+            #tempAnswer = z[0]
     answer = z[0]
+    # smallBar.finish()
     x = [0]*n
     # for i in nonbas:
     #     if i <= n:
-    #         print(nonbas)
-    #         print(x)
-    #         print(i)
-    #         print(LA.ppMat(S))
     #         x[i-1]=-1*S[i-1][0]
     for i in range(m):
         if nonbas[i] <= n:
             x[nonbas[i]-1] = -1*S[i][0]
-    # print(x)
-    # print(n)
-    # print(m)
-    print("The Solution is " + str(answer))
     return {'value':answer, 'x':x}
 
 

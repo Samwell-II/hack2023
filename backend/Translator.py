@@ -107,7 +107,7 @@ def vertexBicliqueIncidence(A, onlyMaximal):
     return bicliques
 
 def bicliqueHelper(source, target, index, A, n, onlyMaximal):
-    '''A small helper function for vertexBicliqueIncidence. Should not be called normally
+    '''A small helper function for vertexBicliqueIncidence. Should not be called directly
     '''
 
     bicliques=[]
@@ -141,12 +141,11 @@ def bicliqueHelper(source, target, index, A, n, onlyMaximal):
 def canAddSource(source, target, index, A, n):
     '''helper for vertexBicliqueIncidence. Do not call'''
     # can index be added to source?
-    addSource = True
     for v in range(n):
         if A[index][v] == 0:
             if v in target:
-                addSource = False
-    return addSource
+                return False
+    return True
 
 def canAddTarget(source, target, index, A, n):
     '''helper for vertexBicliqueIncidence. Do not call'''
@@ -162,7 +161,7 @@ def edgeBicliqueIncidence(A, onlyMaximal):
     '''Creates an edge biclique incidence matrix. Calls vertexBicliqueIncidence and passes onlyMaximal on.
     '''
     
-    print("Starting EdgeBicliqueIncidence")
+    # print("Starting EdgeBicliqueIncidence")
     M = []
     L = vertexBicliqueIncidence(A, onlyMaximal)
     for i in range(len(A)):
@@ -175,8 +174,8 @@ def edgeBicliqueIncidence(A, onlyMaximal):
                     else:
                         row.append(0)
                 M.append(row)
-    print()
-    print("Found " + str(len(M[1])) + " bicliques and " + str(len(M)) + " arcs")
+    # print()
+    # print("Found " + str(len(M[1])) + " bicliques and " + str(len(M)) + " arcs")
     return M
 
 
